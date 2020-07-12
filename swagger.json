@@ -1,0 +1,234 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "version": "0.0.1",
+    "title": "Student Teacher Service"
+  },
+  "host": "localhost:8080",
+  "basePath": "/api",
+  "schemes": [
+    "http",
+    "https"
+  ],
+  "consumes": [
+    "application/json"
+  ],
+  "produces": [
+    "application/json"
+  ],
+  "paths": {
+    "/register": {
+      "x-swagger-router-controller": "registerStudentsTeachersRouter",
+      "post": {
+        "tags": [
+          "Users"
+        ],
+        "operationId": "registerUser",
+        "parameters": [
+          {
+            "in": "body",
+            "name": "body",
+            "description": "The address object that needs to be created",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/RegisterStudentsTeachersRequest"
+            }
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": "Success",
+            "schema": {
+              "$ref": "#/definitions/RegisterStudentsTeachersResponse"
+            }
+          },
+          "default": {
+            "description": "Error",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        }
+      }
+    },
+    "/commonStudents": {
+      "x-swagger-router-controller": "getRegisterStudentsRouter",
+      "get": {
+        "tags": [
+          "Users"
+        ],
+        "operationId": "getRegisterStudentsList",
+        "parameters": [
+          {
+            "in": "query",
+            "name": "teacher",
+            "description": "The field that needs to be query",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "schema": {
+              "$ref": "#/definitions/GetStudentsTeachersResponse"
+            }
+          },
+          "default": {
+            "description": "Error",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        }
+      }
+    },
+    "/suspend": {
+      "x-swagger-router-controller": "suspendStudentsTeachersRouter",
+      "post": {
+        "tags": [
+          "Users"
+        ],
+        "operationId": "suspendStudent",
+        "parameters": [
+          {
+            "in": "body",
+            "name": "body",
+            "description": "The address object that needs to be created",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/SuspendStudentRequest"
+            }
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": "Success",
+            "schema": {
+              "$ref": "#/definitions/SuspendStudentResponse"
+            }
+          },
+          "default": {
+            "description": "Error",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        }
+      }
+    },
+    "/retrievefornotations": {
+      "x-swagger-router-controller": "retrieveNotationsRouter",
+      "post": {
+        "tags": [
+          "Notification"
+        ],
+        "operationId": "retrieveNotations",
+        "parameters": [
+          {
+            "in": "body",
+            "name": "body",
+            "description": "The address object that needs to be created",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/RetrieveNotationRequest"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "schema": {
+              "$ref": "#/definitions/RetrieveNotationResponse"
+            }
+          },
+          "default": {
+            "description": "Error",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        }
+      }
+    },
+    "/swagger": {
+      "x-swagger-pipe": "swagger_raw"
+    }
+  },
+  "definitions": {
+    "RegisterStudentsTeachersRequest": {
+      "properties": {
+        "teacher": {
+          "type": "string"
+        },
+        "students": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "RegisterStudentsTeachersResponse": {
+      "properties": {
+        "id": {
+          "type": "string"
+        }
+      }
+    },
+    "GetStudentsTeachersResponse": {
+      "properties": {
+        "students": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "SuspendStudentRequest": {
+      "properties": {
+        "student": {
+          "type": "string"
+        }
+      }
+    },
+    "SuspendStudentResponse": {
+      "properties": {
+        "id": {
+          "type": "string"
+        }
+      }
+    },
+    "RetrieveNotationRequest": {
+      "properties": {
+        "teacher": {
+          "type": "string"
+        },
+        "notification": {
+          "type": "string"
+        }
+      }
+    },
+    "RetrieveNotationResponse": {
+      "properties": {
+        "recipients": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "ErrorResponse": {
+      "required": [
+        "message"
+      ],
+      "properties": {
+        "message": {
+          "type": "string"
+        }
+      }
+    }
+  }
+}

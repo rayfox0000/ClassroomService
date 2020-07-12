@@ -1,0 +1,25 @@
+CREATE DATABASE `classroom_service`
+
+CREATE TABLE `student` (
+	`id` VARCHAR(50) NOT NULL DEFAULT '',
+	`email` VARCHAR(50) NOT NULL DEFAULT '',
+	PRIMARY KEY (`id`),
+	UNIQUE INDEX `id` (`id`)
+);
+
+CREATE TABLE `teacher` (
+	`id` VARCHAR(50) NOT NULL,
+	`email` VARCHAR(50) NOT NULL,
+	PRIMARY KEY (`id`),
+	UNIQUE INDEX `id` (`id`)
+);
+
+CREATE TABLE `classroom` (
+	`id` VARCHAR(50) NOT NULL,
+	`teacher_id` VARCHAR(50) NOT NULL,
+	`student_id` VARCHAR(50) NOT NULL,
+	PRIMARY KEY (`id`),
+	CONSTRAINT `FK__teacher` FOREIGN KEY (`teacher_id`) REFERENCES `teacher` (`id`),
+	CONSTRAINT `FK__student` FOREIGN KEY (`student_id`) REFERENCES `student` (`id`)
+);
+
